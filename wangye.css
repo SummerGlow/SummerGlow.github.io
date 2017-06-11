@@ -8,7 +8,7 @@ h4{margin:0;}
 .qujian{margin: auto;width: 1000px;padding-bottom: 10px;background-color:#efefef;overflow: hidden;}
 
 /*-----网页主体上部分-----*/
-.top{width: 1000px;background:url(Images/3108.jpg)repeat-x 0 0 scroll transparent;height: 75px;overflow: hidden;}
+.top{width: 1000px;background:url(3108.jpg)repeat-x 0 0 scroll transparent;height: 75px;overflow: hidden;}
 .tu1{width:75px; height:75px;float: right;}
 .tu2{width:75px;height: 75px;float: left;}
 .top1{width: 700px;height:75px;float:right;overflow: hidden;}
