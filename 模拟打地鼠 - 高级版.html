@@ -1,0 +1,107 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<title>模拟打地鼠游戏</title>
+<script src="Jqu/jquery-1.9.1.js"></script>
+<style>
+#Dadiv{width:460px;height:460px;border:3px solid;position:absolute;left:40%;top:10%}
+#quyu1{width:150px;height:150px;border:1px solid;position:absolute;left:1px;top:1px;}
+#quyu2{width:150px;height:150px;border:1px solid;position:absolute;left:154px;top:1px;}
+#quyu3{width:150px;height:150px;border:1px solid;position:absolute;right:1px;top:1px;}
+#quyu4{width:150px;height:150px;border:1px solid;position:absolute;left:1px;top:154px;}
+#quyu5{width:150px;height:150px;border:1px solid;position:absolute;left:154px;top:154px;}
+#quyu6{width:150px;height:150px;border:1px solid;position:absolute;right:1px;top:154px;}
+#quyu7{width:150px;height:150px;border:1px solid;position:absolute;left:1px;bottom:1px;}
+#quyu8{width:150px;height:150px;border:1px solid;position:absolute;left:154px;bottom:1px;}
+#quyu9{width:150px;height:150px;border:1px solid;position:absolute;right:1px;bottom:1px;}
+
+#shuoming{width:200px;height:200px;border:2px solid;position:absolute;left:300px;top:37%;font-size:1.3em;font-weight:bold}
+
+p{width:120px;position:absolute;left:380px;top:25%}
+#shiJ{font-size:2em;color:#ff00cc}
+#kshi{width:100px;height:100px;position:absolute;left:380px;top:10%}
+a{text-decoration:none;font-weight:bold;}
+a:hover{text-decoration:underline;}
+#span1{display:block;margin-bottom:15px}
+
+img{width:150px;height:150px;border:none;cursor:pointer}
+</style>
+</head>
+<body>
+<div id="kshi"><a href="" id="span1" onclick="done();return false">开始游戏</a><br/><a href="">重新准备</a></div>
+<p>时间剩余<span id="shiJ">30</span>秒</p>
+<div id="shuoming">这是一个简单的模拟打地鼠的小游戏，三种动物老鼠，老牛，老虎分别有1分2分3分，请在30秒时间内尽可能消灭它们，如果打到了蛇，则游戏结束。</div>
+<div id="Dadiv">
+<div class="kuai" id="quyu1"></div>
+<div class="kuai" id="quyu2"></div>
+<div class="kuai" id="quyu3"></div>
+<div class="kuai" id="quyu4"></div>
+<div class="kuai" id="quyu5"></div>
+<div class="kuai" id="quyu6"></div>
+<div class="kuai" id="quyu7"></div>
+<div class="kuai" id="quyu8"></div>
+<div class="kuai" id="quyu9"></div>
+</div>
+<script>
+var f=0,p=0,j=0,q=0;
+var b=$(".kuai");
+
+
+function done(){
+bianSe();
+myShi();
+document.getElementById("span1").onclick=function(){return false}
+}
+
+/*函数bianSe（）中，当图片完成加载时，添加到随机小方格中，并绑定单击事件*/
+function bianSe(){
+
+h=Math.floor(Math.random()*4)+1;
+m=Math.floor(Math.random()*9);
+
+var img=new Image();
+img.src="Images/"+h+".jpg";//完成图片加载
+
+$(img).load(function(){
+$(this).appendTo(b[m]);
+if(h==4){$(img).click(function(){//如果点击了蛇的图片，则停止计时，游戏结束
+clearTimeout(sTing);
+alert("被蛇咬啦！游戏结束，你的得分是："+f+"，继续努力！消灭老鼠："+p+"个，消灭老牛："+j+"个，消灭老虎："+q+"个。");
+document.getElementById("span1").onclick=function(){return false}
+clearTimeout(xShe);
+return true;//这个可以不加
+})
+xShe=setTimeout("SheY()",1000)}
+else{
+$(img).click(function(){
+$("img").hide(0);
+if(h==1){p++;f+=1};
+if(h==2){j++;f+=2};
+if(h==3){q++;f+=3};bianSe();})}//函数bianSe()在自身内部绑定的单击事件中循环
+})}
+
+function SheY(){
+$("img").hide(0);bianSe()}
+
+/*计时函数*/
+function myShi(){
+var s=parseInt($("#shiJ").text());
+s--;
+$("#shiJ").text(s);
+if(s===0){
+
+$("img").unbind("click");
+alert("游戏结束，你的得分是："+f+"，继续努力！消灭老鼠："+p+"个，消灭老牛："+j+"个，消灭老虎："+q+"个。");
+document.getElementById("span1").onclick=function(){return false}//这段代码是改变‘开始游戏’的单击事件，使之不产生开始效果
+clearTimeout(xShe);//如果最后时间用完是蛇的图片，则不会执行bianSe()函数
+return true;//函数出口
+}
+sTing=setTimeout("myShi()",1000)}
+
+
+
+
+</script>
+</body>
+</html>
