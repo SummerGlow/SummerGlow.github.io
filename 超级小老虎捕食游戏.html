@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <title>小老虎捕猎游戏</title>
-<script src="Jqu/jquery-1.9.1.js"></script>
+<script src="/jquery-1.9.1.js"></script>
 <style>
 body{background:#cccccc}
 #Dadiv{width:460px;height:460px;border:3px solid;position:absolute;left:35%;top:13%}
@@ -18,7 +18,7 @@ body{background:#cccccc}
 #quyu8{width:150px;height:150px;border:1px solid;position:absolute;right:1px;bottom:1px;}
 .kuai{background:#009900}
 
-#shuoming{width:330px;height:290px;border:2px solid;position:absolute;left:120px;top:37%;font-size:1em;font-weight:bold}
+#shuoming{width:330px;height:310px;border:2px solid;position:absolute;left:120px;top:37%;font-size:1em;font-weight:bold}
 
 p{width:120px;position:absolute;left:300px;top:25%}
 #shiJ{font-size:2em;color:#ff00cc}
@@ -127,7 +127,7 @@ if(k==w+1&&r>0){wuSon2();$("#quyu"+(k+1)).children().remove();alert("武松打�
 if(k-1==m&&k-2==w&&r>0){wuSon2();$("#quyu"+(k+1)).children().remove();alert("武松打死老虎！你的游戏结束，再接再厉。");document.onkeydown=null;clearTimeout(sJ);return true}
 var Q=k+1;
 var img=new Image();
-img.src="Images/laohu.jpg";
+img.src="/laohu.jpg";
 $(img).load(function(){
 $(this).appendTo(b[k])})
 Q="#quyu"+Q;
@@ -145,7 +145,7 @@ if(j){$("#quyu"+k).children().remove();
 if(k==w-1&&r<0){wuSon2();$("#quyu"+(k-1)).children().remove();alert("武松打死老虎！你的游戏结束，再接再厉。");document.onkeydown=null;clearTimeout(sJ);return true;}
 var Q=k-1;
 var img=new Image();
-img.src="Images/laohu.jpg";
+img.src="/laohu.jpg";
 $(img).load(function(){
 $(this).appendTo(b[k])})
 Q="#quyu"+Q;
@@ -159,7 +159,7 @@ if(k==w-1&&r<0){wuSon2();$("#quyu"+(k-1)).children().remove();alert("武松打�
 if(k+1==m&&k+2==w&&r<0){wuSon2();$("#quyu"+(k-1)).children().remove();alert("武松打死老虎！你的游戏结束，再接再厉。");document.onkeydown=null;clearTimeout(sJ);return true}
 var Q=k-1;
 var img=new Image();
-img.src="Images/laohu.jpg";
+img.src="/laohu.jpg";
 $(img).load(function(){
 $(this).appendTo(b[k])})
 Q="#quyu"+Q;
@@ -176,7 +176,7 @@ if(j){$("#quyu"+k).children().remove();
 if(k==w+1&&r>0||k==w-1&&r<0){wuSon2();$("#quyu"+(k+3)).children().remove();alert("武松打死老虎！你的游戏结束，再接再厉。");document.onkeydown=null;clearTimeout(sJ);return true;}
 var Q=k+3;
 var img=new Image();
-img.src="Images/laohu.jpg";
+img.src="/laohu.jpg";
 $(img).load(function(){
 $(this).appendTo(b[k])})
 Q="#quyu"+Q;
@@ -194,7 +194,7 @@ if(k-1==m&&k-2==w&&r>0){wuSon2();$("#quyu"+(k+3)).children().remove();alert("武
 if(k+1==m&&k+2==w&&r<0){wuSon2();$("#quyu"+(k+3)).children().remove();alert("武松打死老虎！你的游戏结束，再接再厉。");document.onkeydown=null;clearTimeout(sJ);return true}
 var Q=k+3;
 var img=new Image();
-img.src="Images/laohu.jpg";
+img.src="/laohu.jpg";
 $(img).load(function(){
 $(this).appendTo(b[k])})
 Q="#quyu"+Q;
@@ -211,7 +211,7 @@ if(j){$("#quyu"+k).children().remove();
 if(k==w-1&&r<0||k==w+1&&r>0){wuSon2();$("#quyu"+(k-3)).children().remove();alert("武松打死老虎！你的游戏结束，再接再厉。");document.onkeydown=null;clearTimeout(sJ);return true;}
 var Q=k-3;
 var img=new Image();
-img.src="Images/laohu.jpg";
+img.src="/laohu.jpg";
 $(img).load(function(){
 $(this).appendTo(b[k])})
 Q="#quyu"+Q;
@@ -228,7 +228,7 @@ if(k+1==m&&k+2==w&&r<0){wuSon2();$("#quyu"+(k-3)).children().remove();alert("武
 if(k-1==m&&k-2==w&&r>0){wuSon2();$("#quyu"+(k-3)).children().remove();alert("武松打死老虎！你的游戏结束，再接再厉。");document.onkeydown=null;clearTimeout(sJ);return true}
 var Q=k-3;
 var img=new Image();
-img.src="Images/laohu.jpg";
+img.src="/laohu.jpg";
 $(img).load(function(){
 $(this).appendTo(b[k])})
 Q="#quyu"+Q;
@@ -246,7 +246,7 @@ document.getElementById("span1").onclick=function(){return false}
 
 function wuSon(){
 var img=new Image();
-img.src="Images/4.jpg";
+img.src="/4.jpg";
 $(img).load(function(){
 $(this).appendTo(b[w]);});
 }
@@ -258,7 +258,7 @@ var y;
 if((w+r)==m){w+=(2*r);y=2*r}//如果遇到猎物，武松位移两格
 else{w+=r;y=r}
 var img=new Image();
-img.src="Images/4.jpg";
+img.src="/4.jpg";
 $(img).load(function(){
 $(this).appendTo(b[w]);});
 $("#quyu"+(w-y)).children().remove();if(w==8)r=-1;if(w==0)r=1;}//通过变量r的正负变换，实现来回运动
@@ -273,7 +273,7 @@ m=Math.floor(Math.random()*9);//两个都是全局变量，可被访问
 if(m==k||m==w){showAni();}//如果m==k，猎物出现的方格将于老虎重复，所以重新执行函数showAni
 else{
 var img=new Image();
-img.src="Images/"+h+".jpg";
+img.src="/"+h+".jpg";
 $(img).load(function(){
 $(this).appendTo(b[m]);})
 }}
