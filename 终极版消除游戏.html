@@ -1,0 +1,126 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<title>简单爱消除游戏</title>
+<script src="Jqu/jquery-1.9.1.js"></script>
+<style>
+body{background:#cccccc}
+#Dadiv{width:405px;height:405px;border:3px solid;position:absolute;left:25%;top:10%;}
+#fKuai1{width:100px;height:100px;position:absolute;left:1px;top:1px}
+#fKuai2{width:100px;height:100px;position:absolute;left:102px;top:1px}
+#fKuai3{width:100px;height:100px;position:absolute;left:203px;top:1px}
+#fKuai4{width:100px;height:100px;position:absolute;left:304px;top:1px}
+#fKuai5{width:100px;height:100px;position:absolute;left:1px;top:102px;}
+#fKuai6{width:100px;height:100px;position:absolute;left:102px;top:102px}
+#fKuai7{width:100px;height:100px;position:absolute;left:203px;top:102px}
+#fKuai8{width:100px;height:100px;position:absolute;left:304px;top:102px}
+#fKuai9{width:100px;height:100px;position:absolute;left:1px;top:203px}
+#fKuai10{width:100px;height:100px;position:absolute;left:102px;top:203px}
+#fKuai11{width:100px;height:100px;position:absolute;left:203px;top:203px}
+#fKuai12{width:100px;height:100px;position:absolute;left:304px;top:203px}
+#fKuai13{width:100px;height:100px;position:absolute;left:1px;top:304px}
+#fKuai14{width:100px;height:100px;position:absolute;left:102px;top:304px}
+#fKuai15{width:100px;height:100px;position:absolute;left:203px;top:304px}
+#fKuai16{width:100px;height:100px;position:absolute;left:304px;top:304px}
+
+a{text-decoration:none;display:block;background-color:#cccc33;font-weight:bold;font-size:20px;position:absolute;left:49%;bottom:14%;}
+a:hover{background-color:#cc0066;color:white}
+#biaot{width:150px;font-weight:bold;font-size:20px;position:absolute;left:35%}
+#shuoming{width:300px;border:3px black solid;position:absolute;left:58%;top:10%;font-weight:bold;color:#cc0066}
+
+#shiJ{width:200px;font-size:1.5em;font-weight:bold;position:absolute;left:58%;top:30%}
+#jiS{color:red;font-size:2em}
+
+
+</style>
+</head>
+<body>
+<p id="biaot">简易爱消除游戏</p>
+<div id="Dadiv">
+<div class="kuai" id="fKuai1"></div>
+<div class="kuai" id="fKuai2"></div>
+<div class="kuai" id="fKuai3"></div>
+<div class="kuai" id="fKuai4"></div>
+<div class="kuai" id="fKuai5"></div>
+<div class="kuai" id="fKuai6"></div>
+<div class="kuai" id="fKuai7"></div>
+<div class="kuai" id="fKuai8"></div>
+<div class="kuai" id="fKuai9"></div>
+<div class="kuai" id="fKuai10"></div>
+<div class="kuai" id="fKuai11"></div>
+<div class="kuai" id="fKuai12"></div>
+<div class="kuai" id="fKuai13"></div>
+<div class="kuai" id="fKuai14"></div>
+<div class="kuai" id="fKuai15"></div>
+<div class="kuai" id="fKuai16"></div>
+</div>
+<div id="shuoming">这是一个简单的消除游戏，通过鼠标点击相同颜色方块即完成消除,类似连连看的玩法。都消除完了之后可点击重新开始，每次通过产生随机数组的方式使方块的颜色样式发生变化。</div>
+<div id="shiJ">已耗时<span id="jiS">0</span>秒</div>
+<a href="">重新开始</a>
+<script>
+var d=[];//用来存储后面点击的方块
+var f=0;
+var j=0;
+
+$(function(){
+/*产生随机序列数组t*/
+var h,k=0,y;
+var t=[];
+var a=["red","blue","#00ff00","purple","#ffff00","#ffff00","blue","black","black","#ff66ff","#ff66ff","#99ffff","#99ffff","#00ff00","purple","red"];
+for(y=16;y>0;y--){
+h=Math.floor(Math.random()*y);
+t[k]=a[h];
+k++;
+var b=[];
+for(var m=0;m<a.length;m++){
+if(m!=h){
+b.push(a[m]);}}
+var a=[].concat(b);}
+
+
+
+
+/*遍历给每个子div添加背景色*/
+$(".kuai").each(function(i){
+$(this).css("background-color",t[i]).html(i+1);})
+
+/*遍历给每个子div绑定单击事件*/
+$(".kuai").each(function(){
+$(this).click(function(){
+$(this).css("border","1px green solid");
+d[f]=$(this);//将点击的方块存在数组里
+f++;//自加1，存下一次点击的方块
+if(f==2){if(d[0].css("background-color")==d[1].css("background-color")&&d[0].html()!=d[1].html()){d[0].hide(0);d[1].hide(0);done();f=0}//验证第一次和某个下一次点击的方块颜色是否一样
+else{d[1].css("border","none");f=1}//如果第一次点的方块颜色和第二次不一样，则保留第一次选的方块，重新验证接下来点的方块颜色，直到一样的时候两方块消失。
+}})
+})
+
+$("#Dadiv").one("click",Jtime);//利用冒泡为整个游戏区域绑定一个触发一次的单击函数，所以说冒泡过程也不全是坏事
+
+
+
+})
+function done(){
+j++;
+if(j==8){
+alert("消除完成，very good!");
+clearTimeout(sTing);//全部消除完成，终止计时
+}
+}
+
+
+/*计时函数*/
+function Jtime(){
+
+var s=parseInt($("#jiS").text());
+s++;
+$("#jiS").text(s);
+sTing=setTimeout("Jtime()",1000);}
+
+
+
+
+</script>
+</body>
+</html>
