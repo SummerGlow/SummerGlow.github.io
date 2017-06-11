@@ -76,7 +76,7 @@ var F=parseInt($("#zonFen").text());
 var b=$(".kuai");
 var k=4;//该变量用来获取方格
 var img=new Image();
-img.src="Images/laohu.jpg";
+img.src="/laohu.jpg";
 $(img).load(function(){
 $(this).appendTo(b[k])});
 
@@ -112,7 +112,7 @@ if(j){$("#quyu"+k).children().remove();
 if(k==w+1&&r>0){wuSon2();$("#quyu"+(k+1)).children().remove();alert("武松打死老虎！你的游戏结束，再接再厉。");document.onkeydown=null;clearTimeout(sJ);return true;}//这是在有猎物的情况下两个碰头，则老虎被打死,条件里的r用来确定武松的移动方向（后面都是）
 var Q=k+1;
 var img=new Image();
-img.src="Images/laohu.jpg";
+img.src="/laohu.jpg";
 $(img).load(function(){
 $(this).appendTo(b[k])})
 Q="#quyu"+Q;
