@@ -1,0 +1,67 @@
+@charset "utf-8";
+h3{margin: 0;}
+h4{margin:0;}
+
+
+/*----网页主体------*/
+.zhuti{padding-bottom: 50px;background-color: #efefef;}
+.qujian{margin: auto;width: 1000px;padding-bottom: 10px;background-color:#efefef;overflow: hidden;}
+
+/*-----网页主体上部分-----*/
+.top{width: 1000px;background:url(Images/3108.jpg)repeat-x 0 0 scroll transparent;height: 75px;overflow: hidden;}
+.tu1{width:75px; height:75px;float: right;}
+.tu2{width:75px;height: 75px;float: left;}
+.top1{width: 700px;height:75px;float:right;overflow: hidden;}
+.top1 a{float: left;width: 100px;color:white;margin:25px 2px 0 20px;padding:8px;text-align: center;text-decoration: none;font-weight: bold;}
+.top1 a:hover{color:#9a0000;background-color: white;}
+.top1 a.check{color:#9a0000;background-color: white;}
+
+/*-------网页主体下部分----*/
+.qujian2{margin:auto;width: 850px;overflow: hidden;border-bottom:1px solid;background-color: white;}
+
+/*-------网页主体下左部分-----*/
+.t1{float: left;width: 200px;overflow: hidden;padding: 20px 0 30px 0}
+.tu3{width:200px;height:200px;margin-bottom: 10px;}
+.t101{width: 200px;border-top: 1px #efefef solid;}
+.t101 dl{margin-left: 30px;font-size: 1.1em;color:red;font-weight: bold;}
+.t101 a{color:blue;text-decoration: none;}
+.t101 a:hover{text-decoration: underline;}
+
+/*-----网页主体下中部分----*/
+.t2{float: left;width: 380px;padding: 20px 10px 30px 10px;overflow: hidden;}
+.t201{width: 380px;margin-bottom: 10px;border: 1px solid;}
+.t201 b{font-size: 0.9em;}
+.t2 a{padding:5px;margin-right: 10px;background-color: #cccccc;text-decoration: none;}
+.t2 a:hover{color: #9a0000;text-decoration: underline;}
+iframe{width: 380px;height: 300px;margin-top:2px;}
+
+/*----网页主体下右部分-----*/
+.t3{float: left;width: 230px;padding:20px 10px 30px 10px;overflow: hidden;}
+.tu4{width: 230px;height: 200px;margin-bottom: 10px;}
+.t301{width: 230px;margin-bottom: 10px;border-bottom: 1px #cccccc solid;}
+.t301 b{font-size: 0.8em;}
+
+/*-----网页底部分-----*/
+.t4{float:left;width: 850px;text-align: right;color: green;font-size: 1.1em;font-weight: bold;}
+
+/*----youmo,gushi,baike-----*/
+.y1{width: 390px;height: 850px;margin: auto;}
+
+/*-----三个子网页----*/
+a.a01{color:#9a0000;background-color: white;}
+.gh{float: left;width: 850px;height: 15px;}
+/*-----女士福利--------*/
+.t5{float: left;width: 360px;padding:0 20px 20px 20px;border-right: 1px #cccccc solid;}
+.t501{width:360px;overflow: hidden;margin-bottom: 10px;}
+.t501 h3{color:red}
+.ziti1{font-size: 0.9em}
+.t6{float:left;width: 400px;padding:0 20px 20px 20px;}
+.t601{width: 400px;overflow: hidden;margin-bottom: 10px;}
+.t601 h3{color:blue;}
+/*-----男士福利-----*/
+.t7{float: left;width: 850px;}
+.tu5{float: right;width: 100px;height: 150px;}
+.tu6{float: right;width:650px;height: 300px;}
+.tu7{float: left;width: 100px;height: 150px;}
+ 
+ /*---夏辉编写----*/
