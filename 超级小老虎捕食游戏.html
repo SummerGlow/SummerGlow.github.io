@@ -273,7 +273,7 @@ m=Math.floor(Math.random()*9);//两个都是全局变量，可被访问
 if(m==k||m==w){showAni();}//如果m==k，猎物出现的方格将于老虎重复，所以重新执行函数showAni
 else{
 var img=new Image();
-img.src="/"+h+".jpg";
+img.src="/2"+h+".jpg";
 $(img).load(function(){
 $(this).appendTo(b[m]);})
 }}
