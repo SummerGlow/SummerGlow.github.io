@@ -246,7 +246,7 @@ document.getElementById("span1").onclick=function(){return false}
 
 function wuSon(){
 var img=new Image();
-img.src="/4.jpg";
+img.src="/24.jpg";
 $(img).load(function(){
 $(this).appendTo(b[w]);});
 }
@@ -258,7 +258,7 @@ var y;
 if((w+r)==m){w+=(2*r);y=2*r}//如果遇到猎物，武松位移两格
 else{w+=r;y=r}
 var img=new Image();
-img.src="/4.jpg";
+img.src="/24.jpg";
 $(img).load(function(){
 $(this).appendTo(b[w]);});
 $("#quyu"+(w-y)).children().remove();if(w==8)r=-1;if(w==0)r=1;}//通过变量r的正负变换，实现来回运动
