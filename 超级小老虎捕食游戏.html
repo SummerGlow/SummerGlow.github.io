@@ -1,0 +1,293 @@
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<title>小老虎捕猎游戏</title>
+<script src="Jqu/jquery-1.9.1.js"></script>
+<style>
+body{background:#cccccc}
+#Dadiv{width:460px;height:460px;border:3px solid;position:absolute;left:35%;top:13%}
+#quyu0{width:150px;height:150px;border:1px solid;position:absolute;left:1px;top:1px;}
+#quyu1{width:150px;height:150px;border:1px solid;position:absolute;left:154px;top:1px;}
+#quyu2{width:150px;height:150px;border:1px solid;position:absolute;right:1px;top:1px;}
+#quyu3{width:150px;height:150px;border:1px solid;position:absolute;left:1px;top:154px;}
+#quyu4{width:150px;height:150px;border:1px solid;position:absolute;left:154px;top:154px;}
+#quyu5{width:150px;height:150px;border:1px solid;position:absolute;right:1px;top:154px;}
+#quyu6{width:150px;height:150px;border:1px solid;position:absolute;left:1px;bottom:1px;}
+#quyu7{width:150px;height:150px;border:1px solid;position:absolute;left:154px;bottom:1px;}
+#quyu8{width:150px;height:150px;border:1px solid;position:absolute;right:1px;bottom:1px;}
+.kuai{background:#009900}
+
+#shuoming{width:330px;height:290px;border:2px solid;position:absolute;left:120px;top:37%;font-size:1em;font-weight:bold}
+
+p{width:120px;position:absolute;left:300px;top:25%}
+#shiJ{font-size:2em;color:#ff00cc}
+#kshi{width:100px;height:100px;position:absolute;left:320px;top:13%}
+a{text-decoration:none;font-weight:bold;}
+a:hover{text-decoration:underline;}
+#span1{display:block;margin-bottom:15px}
+
+.lieW{width:200px;height:300px;border:2px solid;position:absolute;left:72%;top:15%}
+.biaoT{display:block;margin:10px;font-size:1.3em;font-weight:bold;}
+.biaoTi{width:150px;margin:10px;border:1px solid;font-size:1.3em;font-weight:bold}
+#diShu{font-size:1.5em;color:red}
+#gonJi{font-size:1.5em;color:red}
+#laoNiu{font-size:1.5em;color:red}
+#tiaoY{font-size:1.5em;color:red}
+#zonFen{font-size:1.5em;color:red}
+
+#xiahui{width:200px;font-size:1em;font-weight:bold;position:absolute;left:72%;top:70%}
+img{width:150px;height:150px;border:none;cursor:pointer}
+.zhuTi{width:300px;font-size:1.7em;margin:auto;color:#990066}
+</style>
+</head>
+<body>
+<div class="zhuTi">小老虎绿草地捕猎游戏</div>
+<div id="kshi"><a href="" id="span1" onclick="done();return false">开始游戏</a><br/><a href="">重新准备</a></div>
+<p>时间剩余<span id="shiJ">60</span>秒</p>
+<div id="shuoming">游戏方式：<br/>点击开始游戏后，通过键盘上的上下左右键控制老虎的移动方向在草地上捕捉猎物，地鼠1分，公鸡2分，老牛5分。当分数最少有3分时，可以按空格键实现快速跳跃捕捉，每次消耗3分。游戏中会有一个打虎英雄武松存在，武松的运动轨迹是以S型上下往复的,且遇到猎物会跳过去，如果是在左上角和右下角遇到猎物，那么恭喜你武松不小心跳出草地，你的小老虎可以尽情捕猎了。如果老虎撞上武松或正好和武松相遇，则老虎被打死，游戏结束。请在60秒的时间内尽可能多的捕捉猎物，为使得到的分最多，请发挥你的聪明才智合理使用跳跃捕捉并躲开武松。</div>
+<div id="Dadiv">
+<div class="kuai" id="quyu0"></div>
+<div class="kuai" id="quyu1"></div>
+<div class="kuai" id="quyu2"></div>
+<div class="kuai" id="quyu3"></div>
+<div class="kuai" id="quyu4"></div>
+<div class="kuai" id="quyu5"></div>
+<div class="kuai" id="quyu6"></div>
+<div class="kuai" id="quyu7"></div>
+<div class="kuai" id="quyu8"></div>
+</div>
+<div class="lieW"><span class="biaoT">游戏数据板：</span>
+<div class="biaoTi">捕捉地鼠：<span id="diShu">0</span></div>
+<div class="biaoTi">捕捉公鸡：<span id="gonJi">0</span></div>
+<div class="biaoTi">捕捉老牛：<span id="laoNiu">0</span></div>
+<div class="biaoTi">跳跃次数：<span id="tiaoY">0</span></div>
+<div class="biaoTi">得分：<span id="zonFen">0</span></div>
+</div>
+<div id="xiahui">游戏创作者：夏辉<br/>IT的世界我还是个菜鸟！</div>
+<script>
+var w=0;
+var s=parseInt($("#diShu").text());
+var g=parseInt($("#gonJi").text());
+var n=parseInt($("#laoNiu").text());
+var t=parseInt($("#tiaoY").text());
+var F=parseInt($("#zonFen").text());
+
+var b=$(".kuai");
+var k=4;//该变量用来获取方格
+var img=new Image();
+img.src="Images/laohu.jpg";
+$(img).load(function(){
+$(this).appendTo(b[k])});
+
+/*下面是键盘事件*/
+document.onkeydown=function(e){
+var e=e||window.event;
+var f=e.keyCode||e.which||e.charCode;
+
+if(f==32){//这个是跳跃捕捉事件，由空格键控制
+if(F>2){
+F-=3;//在有至少3分的情况下可以跳跃捕捉，不过要减掉三分
+t++;
+$("#quyu"+k).children().remove();
+$("#quyu"+m).children().remove();
+k=m;
+var img=new Image();
+img.src="Images/laohu.jpg";
+$(img).load(function(){
+$(this).appendTo(b[k])});
+$("#tiaoY").text(t);
+if(h==1){s++;$("#diShu").text(s);F+=1;$("#zonFen").text(F)}
+if(h==2){g++;$("#gonJi").text(g);F+=2;$("#zonFen").text(F)}
+if(h==3){n++;$("#laoNiu").text(n);F+=5;$("#zonFen").text(F)};
+showAni();//统计完分数等数据后，执行函数，h和m的值变化
+}}
+
+if(f==37){//左移一个
+if(k>0){
+k=k-1;//每一次移动k的值都会变化，其它三个按键一样
+if(k==w){alert("武松打死老虎！你的游戏结束，再接再厉。");document.onkeydown=null;clearTimeout(sJ);return true;}//往武松身上撞，被打死
+var j=document.getElementById("quyu"+k).childNodes[0];//获取即将移动到的方格的子节点，即有没有猎物图片
+if(j){$("#quyu"+k).children().remove();
+if(k==w+1&&r>0){wuSon2();$("#quyu"+(k+1)).children().remove();alert("武松打死老虎！你的游戏结束，再接再厉。");document.onkeydown=null;clearTimeout(sJ);return true;}//这是在有猎物的情况下两个碰头，则老虎被打死,条件里的r用来确定武松的移动方向（后面都是）
+var Q=k+1;
+var img=new Image();
+img.src="Images/laohu.jpg";
+$(img).load(function(){
+$(this).appendTo(b[k])})
+Q="#quyu"+Q;
+$(Q).children().remove();
+if(h==1){s++;$("#diShu").text(s);F+=1;$("#zonFen").text(F)}
+if(h==2){g++;$("#gonJi").text(g);F+=2;$("#zonFen").text(F)}
+if(h==3){n++;$("#laoNiu").text(n);F+=5;$("#zonFen").text(F)};wuSon2();//武松先移动，再产生新猎物
+showAni();}//这个if条件先检测下个方格存不存在猎物图片，如果存在，删除它然后老虎图片进入，再然后执行showAni函数产生新的猎物图片
+
+else{//如果下个要进的方格没有猎物图片，则只是老虎图片进入，原位置的老虎图片删除掉
+if(k==w+1&&r>0){wuSon2();$("#quyu"+(k+1)).children().remove();alert("武松打死老虎！你的游戏结束，再接再厉。");document.onkeydown=null;clearTimeout(sJ);return true;}//这个if表示如果刚好两个碰头，则老虎被打死，后面三个按键一样
+if(k-1==m&&k-2==w&&r>0){wuSon2();$("#quyu"+(k+1)).children().remove();alert("武松打死老虎！你的游戏结束，再接再厉。");document.onkeydown=null;clearTimeout(sJ);return true}
+var Q=k+1;
+var img=new Image();
+img.src="Images/laohu.jpg";
+$(img).load(function(){
+$(this).appendTo(b[k])})
+Q="#quyu"+Q;
+$(Q).children().remove();
+wuSon2();
+}
+}}
+
+if(f==39){
+if(k<8){
+k=k+1;
+if(k==w){alert("武松打死老虎！你的游戏结束，再接再厉。");document.onkeydown=null;clearTimeout(sJ);return true;}
+var j=document.getElementById("quyu"+k).childNodes[0];
+if(j){$("#quyu"+k).children().remove();
+if(k==w-1&&r<0){wuSon2();$("#quyu"+(k-1)).children().remove();alert("武松打死老虎！你的游戏结束，再接再厉。");document.onkeydown=null;clearTimeout(sJ);return true;}
+var Q=k-1;
+var img=new Image();
+img.src="Images/laohu.jpg";
+$(img).load(function(){
+$(this).appendTo(b[k])})
+Q="#quyu"+Q;
+$(Q).children().remove();
+if(h==1){s++;$("#diShu").text(s);F+=1;$("#zonFen").text(F)}//捕捉动作完成后，这三个if条件用来检测被捕捉的猎物是什么，相应的数据自动相加
+if(h==2){g++;$("#gonJi").text(g);F+=2;$("#zonFen").text(F)}
+if(h==3){n++;$("#laoNiu").text(n);F+=5;$("#zonFen").text(F)};//这里的m++只为了改变m的值，也可为其它公式，不改变m值的话，老虎吃掉猎物同时遇到武松的情况武松仍会跳过去，这个m在后面的showAni函数重新赋值
+wuSon2();showAni()}
+else{
+if(k==w-1&&r<0){wuSon2();$("#quyu"+(k-1)).children().remove();alert("武松打死老虎！你的游戏结束，再接再厉。");document.onkeydown=null;clearTimeout(sJ);return true;}
+if(k+1==m&&k+2==w&&r<0){wuSon2();$("#quyu"+(k-1)).children().remove();alert("武松打死老虎！你的游戏结束，再接再厉。");document.onkeydown=null;clearTimeout(sJ);return true}
+var Q=k-1;
+var img=new Image();
+img.src="Images/laohu.jpg";
+$(img).load(function(){
+$(this).appendTo(b[k])})
+Q="#quyu"+Q;
+$(Q).children().remove();wuSon2();}
+}
+}
+
+if(f==38){
+if(k>2){
+k=k-3;
+if(k==w){alert("武松打死老虎！你的游戏结束，再接再厉。");document.onkeydown=null;clearTimeout(sJ);return true;}
+var j=document.getElementById("quyu"+k).childNodes[0];
+if(j){$("#quyu"+k).children().remove();
+if(k==w+1&&r>0||k==w-1&&r<0){wuSon2();$("#quyu"+(k+3)).children().remove();alert("武松打死老虎！你的游戏结束，再接再厉。");document.onkeydown=null;clearTimeout(sJ);return true;}
+var Q=k+3;
+var img=new Image();
+img.src="Images/laohu.jpg";
+$(img).load(function(){
+$(this).appendTo(b[k])})
+Q="#quyu"+Q;
+$(Q).children().remove();
+if(h==1){s++;$("#diShu").text(s);F+=1;$("#zonFen").text(F)}
+if(h==2){g++;$("#gonJi").text(g);F+=2;$("#zonFen").text(F)}
+if(h==3){n++;$("#laoNiu").text(n);F+=5;$("#zonFen").text(F)};
+
+wuSon2();
+showAni()}
+else{
+if(k==w+1&&r>0){wuSon2();$("#quyu"+(k+3)).children().remove();alert("武松打死老虎！你的游戏结束，再接再厉。");document.onkeydown=null;clearTimeout(sJ);return true;}
+if(k==w-1&&r<0){wuSon2();$("#quyu"+(k+3)).children().remove();alert("武松打死老虎！你的游戏结束，再接再厉。");document.onkeydown=null;clearTimeout(sJ);return true;}
+if(k-1==m&&k-2==w&&r>0){wuSon2();$("#quyu"+(k+3)).children().remove();alert("武松打死老虎！你的游戏结束，再接再厉。");document.onkeydown=null;clearTimeout(sJ);return true}
+if(k+1==m&&k+2==w&&r<0){wuSon2();$("#quyu"+(k+3)).children().remove();alert("武松打死老虎！你的游戏结束，再接再厉。");document.onkeydown=null;clearTimeout(sJ);return true}
+var Q=k+3;
+var img=new Image();
+img.src="Images/laohu.jpg";
+$(img).load(function(){
+$(this).appendTo(b[k])})
+Q="#quyu"+Q;
+$(Q).children().remove();wuSon2();
+}}
+}
+
+if(f==40){
+if(k<6){
+k=k+3;
+if(k==w){alert("武松打死老虎！你的游戏结束，再接再厉。");document.onkeydown=null;clearTimeout(sJ);return true;}
+var j=document.getElementById("quyu"+k).childNodes[0];
+if(j){$("#quyu"+k).children().remove();
+if(k==w-1&&r<0||k==w+1&&r>0){wuSon2();$("#quyu"+(k-3)).children().remove();alert("武松打死老虎！你的游戏结束，再接再厉。");document.onkeydown=null;clearTimeout(sJ);return true;}
+var Q=k-3;
+var img=new Image();
+img.src="Images/laohu.jpg";
+$(img).load(function(){
+$(this).appendTo(b[k])})
+Q="#quyu"+Q;
+$(Q).children().remove();
+if(h==1){s++;$("#diShu").text(s);F+=1;$("#zonFen").text(F)}
+if(h==2){g++;$("#gonJi").text(g);F+=2;$("#zonFen").text(F)}
+if(h==3){n++;$("#laoNiu").text(n);F+=5;$("#zonFen").text(F)};
+wuSon2();
+showAni()}
+else{
+if(k==w-1&&r<0){wuSon2();$("#quyu"+(k-3)).children().remove();alert("武松打死老虎！你的游戏结束，再接再厉。");document.onkeydown=null;clearTimeout(sJ);return true;}
+if(k==w+1&&r>0){wuSon2();$("#quyu"+(k-3)).children().remove();alert("武松打死老虎！你的游戏结束，再接再厉。");document.onkeydown=null;clearTimeout(sJ);return true;}
+if(k+1==m&&k+2==w&&r<0){wuSon2();$("#quyu"+(k-3)).children().remove();alert("武松打死老虎！你的游戏结束，再接再厉。");document.onkeydown=null;clearTimeout(sJ);return true}
+if(k-1==m&&k-2==w&&r>0){wuSon2();$("#quyu"+(k-3)).children().remove();alert("武松打死老虎！你的游戏结束，再接再厉。");document.onkeydown=null;clearTimeout(sJ);return true}
+var Q=k-3;
+var img=new Image();
+img.src="Images/laohu.jpg";
+$(img).load(function(){
+$(this).appendTo(b[k])})
+Q="#quyu"+Q;
+$(Q).children().remove();wuSon2();}
+}}}
+
+
+
+function done(){
+wuSon();
+showAni();
+myShi();
+document.getElementById("span1").onclick=function(){return false}
+}
+
+function wuSon(){
+var img=new Image();
+img.src="Images/4.jpg";
+$(img).load(function(){
+$(this).appendTo(b[w]);});
+}
+
+/*下面是武松移动的函数*/
+var r=1;
+function wuSon2(){
+var y;
+if((w+r)==m){w+=(2*r);y=2*r}//如果遇到猎物，武松位移两格
+else{w+=r;y=r}
+var img=new Image();
+img.src="Images/4.jpg";
+$(img).load(function(){
+$(this).appendTo(b[w]);});
+$("#quyu"+(w-y)).children().remove();if(w==8)r=-1;if(w==0)r=1;}//通过变量r的正负变换，实现来回运动
+
+
+
+
+
+function showAni(){
+h=Math.floor(Math.random()*3)+1;
+m=Math.floor(Math.random()*9);//两个都是全局变量，可被访问
+if(m==k||m==w){showAni();}//如果m==k，猎物出现的方格将于老虎重复，所以重新执行函数showAni
+else{
+var img=new Image();
+img.src="Images/"+h+".jpg";
+$(img).load(function(){
+$(this).appendTo(b[m]);})
+}}
+
+function myShi(){
+var Time=parseInt($("#shiJ").text());
+Time--;
+$("#shiJ").text(Time);
+if(Time==0){
+alert("夏辉哥哥跟你说时间到了，你的游戏已经结束，恭喜没被武松打死小老虎，请继续努力");
+document.onkeydown=null;
+return true}
+sJ=setTimeout("myShi()",1000)
+}
+</script>
+</body>
+</html>
