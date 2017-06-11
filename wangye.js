@@ -6,7 +6,5 @@
 		if(Mimi3==="xiahui66666"){
 			open("rose.html","","");
 		}
-		if(Mimi3==="xiahui88888"){
-			open("ggfly.html","","")
-		}
+		
 	}
